@@ -1,0 +1,98 @@
+<div class="turi-rag-table-wrapper">
+
+    <table class="turi-rag-table">
+
+        <thead>
+            <tr class="turi-rag-table-header">
+
+                {{#showdocumentid}}
+                    <th class="turi-rag-table-cell">
+                        {{#str}}document_id, local_turi_rag{{/str}}
+                    </th>
+                {{/showdocumentid}}
+
+                {{#showcheckbox}}
+                    <th class="turi-rag-table-cell turi-rag-table-action"></th>
+                {{/showcheckbox}}
+
+                <th class="turi-rag-table-text">
+                    {{#str}}document_name, local_turi_rag{{/str}}
+                </th>
+
+                <th class="turi-rag-table-text">
+                    {{#str}}file_name, local_turi_rag{{/str}}
+                </th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {{#documents}}
+
+            <tr class="turi-rag-table-row">
+
+                {{#showdocumentid}}
+                    <td class="turi-rag-document-id cell-center">
+                        {{document_id}}
+                    </td>
+                {{/showdocumentid}}
+
+                {{#showcheckbox}}
+                    <td class="turi-rag-table-cell turi-rag-table-action cell-center">
+
+                        {{#supported}}
+
+                            {{#disabled}}
+
+                                <input
+                                    type="checkbox"
+                                    class="turi-rag-checkbox"
+                                    checked
+                                    disabled
+                                >
+
+                            {{/disabled}}
+
+                            {{^disabled}}
+
+                                <input
+                                    type="checkbox"
+                                    class="turi-rag-checkbox"
+                                    name="documents[]"
+                                    value="{{id}}"
+                                >
+
+                            {{/disabled}}
+
+                        {{/supported}}
+
+                        {{^supported}}
+
+                            <span
+                                class="turi-rag-file-not-supported"
+                                title="{{#str}}unsupported_file_format, local_turi_rag{{/str}}">
+                            </span>
+
+                        {{/supported}}
+
+                    </td>
+                {{/showcheckbox}}
+
+                <td class="turi-rag-table-cell turi-rag-document-name">
+                    {{document_name}}
+                </td>
+
+                <td class="turi-rag-table-cell turi-rag-file-name">
+                    {{file_name}}
+                </td>
+
+            </tr>
+
+        {{/documents}}
+
+        </tbody>
+
+    </table>
+
+</div>

@@ -1,0 +1,52 @@
+<div class="turi-rag-wrapper">
+    <div class="turi-rag-profile">
+
+        <div class="turi-rag-profile-header">
+
+            <div class="turi-rag-profile-info">
+
+                <h2 class="turi-rag-title">
+                    {{#str}}select_documents, local_turi_rag{{/str}}
+                </h2>
+
+                <p class="turi-rag-description">
+                    {{#str}}select_documents_description, local_turi_rag{{/str}}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form method="post" action="{{createurl}}">
+
+            <input
+                type="hidden"
+                name="sesskey"
+                value="{{sesskey}}"
+            >
+
+            <div class="turi-rag-profile-documents">
+
+                {{> local_turi_rag/document_table}}
+
+                <div class="turi-rag-profile-actions">
+                    <a
+                        href="{{cancelurl}}"
+                        class="turi-rag-button turi-rag-button-primary">
+                        {{#str}}cancel, local_turi_rag{{/str}}
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="turi-rag-button turi-rag-button-secondary">
+                        {{#str}}continue, local_turi_rag{{/str}}
+                    </button>
+                </div>
+
+            </div>
+            
+        </form>
+        
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<nav class="turi-rag-tabs">
+
+    <a href="{{ragprofileurl}}"
+       class="turi-rag-tab {{#ragprofileactive}}active{{/ragprofileactive}}">
+        {{#str}}ragprofile, local_turi_rag{{/str}}
+    </a>
+
+    <a href="{{explanationurl}}"
+       class="turi-rag-tab {{#explanationactive}}active{{/explanationactive}}">
+        {{#str}}explanation, local_turi_rag{{/str}}
+    </a>
+
+    {{#showprompt}}
+    <a href="{{prompturl}}"
+       class="turi-rag-tab {{#promptactive}}active{{/promptactive}}">
+        {{#str}}prompt, local_turi_rag{{/str}}
+    </a>
+    {{/showprompt}}
+</nav>

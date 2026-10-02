@@ -1,0 +1,611 @@
+:root {
+    /* Text */
+    --turi-color-text-primary: #0e1218;
+    --turi-color-text-secondary: #374151;
+    /* --turi-color-text-tertiary: #6b7280; */
+    --turi-color-text-tertiary: #1f7a6d;
+    --turi-color-text-muted: #9ca3af;
+    --turi-color-text-label: #8a8a8a;
+
+    /* Background */
+    --turi-color-background-primary: #ffffff;
+    --turi-color-background-secondary: #fbfbfb;
+    --turi-color-background-tertiary: #f8f9fa;
+    --turi-color-background-active: #f5f3ff;
+
+    /* Border */
+    --turi-color-border-primary: #dee2e6;
+    --turi-color-border-secondary: #e5e7eb;
+    --turi-color-border-input: #ced4da;
+
+    /* Links */
+    --turi-color-link: #1d4ed8;
+    --turi-color-link-hover: #1e40af;
+    --turi-color-link-active: #1e3a8a;
+    --turi-color-link-visited: #6d28d9;
+
+    --turi-color-link: #1f7a6d;
+    --turi-color-link-hover: #16574e;
+    
+    --turi-color-link-focus-ring: rgba(31, 122, 109, 0.35);
+
+
+    /* Accent */
+    /* --turi-color-accent: #6366f1; */
+    --turi-color-accent: #1d3459;
+    /* --turi-color-accent-hover: #4f46e5; */
+    --turi-color-accent-hover: #16233a;
+    --turi-color-accent-active: #4338ca;
+    --turi-color-accent-light: #a5b4fc;
+    --turi-color-accent-background: #f5f3ff;
+    --turi-color-accent-border: #ddd6fe;
+
+    /* Status - Warning */
+    --turi-color-warning-text: #672724;
+    --turi-color-warning-background: #fff5f5;
+    --turi-color-warning-border: #f5c2c0;
+
+    /* Status - Reliable / Success */
+    /* --turi-color-success-text: #247a45; */
+    --turi-color-success-text: #1f7a6d;
+    --turi-color-success-background: #f0faf4;
+    --turi-color-success-border: #c6ecd3;
+
+    /* Focus */
+    --turi-color-focus: rgba(99, 102, 241, 0.15);
+
+    /* Shadow */
+    --turi-color-shadow: rgba(99, 102, 241, 0.15);
+
+    --turi-font: "IBM Plex Sans", "Segoe UI", sans-serif;
+}
+
+
+/* nawigation */
+.turi-rag-tabs {
+    display: flex;
+    gap: 28px;
+    border-bottom: 1px solid var(--turi-color-border-secondary);
+    margin-bottom: 24px;
+}
+
+.turi-rag-tab {
+    display: block;
+    padding: 12px 4px;
+    color: var(--turi-color-text-secondary);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    font-size: 15px;
+}
+
+.turi-rag-tab:hover {
+    color: var(--turi-color-link-hover);
+    text-decoration: none;
+}
+
+.turi-rag-tab.active {
+    color: var(--turi-color-link);
+    border-bottom-color: var(--turi-color-link);
+}
+
+/* General */
+.cell-center {
+    text-align: center;
+    vertical-align: middle !important;
+}
+
+.turi-rag-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    min-height: calc(100vh - 350px);
+    height: auto;
+}
+
+.turi-rag-profile {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--turi-color-border-primary);
+    border-radius: 8px;
+    width: 80%;
+    padding: 30px;
+    font-family: var(--turi-font);
+    color: var(--turi-color-text-primary);
+    background: var(--turi-color-background-primary);
+}
+
+.turi-rag-profile-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px;
+    background: var(--turi-color-background-primary);
+    border-bottom: 1px solid var(--turi-color-border-secondary);
+}
+
+.turi-rag-profile-info {
+    min-width: 0;
+}
+
+.turi-rag-title {
+    margin: 0 0 8px;
+    color: var(--turi-color-text-primary);
+    font-family: var(--turi-font);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+.turi-rag-title
+.turi-rag-subtitle
+.turi-rag-description
+.turi-rag-text  
+.turi-rag-description {
+    max-width: 760px;
+    margin: 0;
+    color: var(--turi-color-text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.turi-rag-profile-header-actions {
+    display: flex;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.turi-rag-profile-documents {
+    padding: 24px;
+}
+
+.turi-rag-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.turi-rag-subtitle {
+    margin: 0;
+    color: var(--turi-color-text-primary);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.turi-rag-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-family: var(--turi-font);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.turi-rag-button-primary {
+    color: var(--turi-color-background-secondary);
+    background: var(--turi-color-text-secondary);
+}
+
+.turi-rag-button-primary:hover {
+    color: var(--turi-color-background-secondary);
+    background: var(--turi-color-text-primary);
+}
+
+.turi-rag-button-secondary {
+    color: var(--turi-color-background-secondary);
+    background: var(--turi-color-accent);
+    border: 1px solid var(--turi-color-border-input);
+}
+
+.turi-rag-button-secondary:hover {
+    color: var(--turi-color-background-secondary);
+    background: var(--turi-color-accent-hover);
+    border-color: var(--turi-color-text-secondary);
+    text-decoration: none;
+}
+
+.turi-rag-button-danger {
+    color: var(--turi-color-warning-text);
+    background: var(--turi-color-warning-background);
+    border: 1px solid var(--turi-color-warning-border);
+}
+
+.turi-rag-button-danger:hover {
+    color: var(--turi-color-warning-text);
+    background: #ffeded;
+    border-color: #e9aaa7;
+    text-decoration: none;
+}
+
+.turi-rag-profile-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: auto;
+    padding: 20px 24px;
+    background: var(--turi-color-background-secondary);
+    border-top: 1px solid var(--turi-color-border-secondary);
+}
+
+.turi-rag-profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+/* table */
+.turi-rag-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--turi-color-border-primary);
+    border-radius: 6px;
+}
+
+.turi-rag-table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+    background: var(--turi-color-background-primary);
+    font-family: var(--turi-font);
+    font-size: 14px;
+}
+
+.turi-rag-table thead {
+    background: var(--turi-color-background-tertiary);
+}
+
+.turi-rag-table th {
+    padding: 12px 16px;
+    color: var(--turi-color-text-secondary);
+    border-bottom: 1px solid var(--turi-color-border-primary);
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.turi-rag-table-cell {
+    padding: 14px 16px;
+    color: var(--turi-color-text-secondary);
+    border-bottom: 1px solid var(--turi-color-border-secondary);
+    vertical-align: middle;
+}
+
+.turi-rag-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.turi-rag-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.turi-rag-table tbody tr:hover {
+    background: var(--turi-color-background-secondary);
+}
+
+.turi-rag-document-id {
+    width: 120px;
+    padding: 14px 16px;
+    color: var(--turi-color-text-muted) !important;
+    font-variant-numeric: tabular-nums;
+}
+
+.turi-rag-table-text {
+    color: var(--turi-color-text-primary) !important;
+    font-weight: 500;
+}
+
+.turi-rag-file-not-supported {
+    display: inline-block;
+    width: 12px;
+    height: 2px;
+    background-color: var(--turi-color-text-secondary);
+    vertical-align: middle;
+    border-radius: 1px;
+}
+
+.turi-rag-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--turi-color-accent);
+    border-radius: 4px;
+    background-color: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    transition: all 0.15s ease;
+    margin: 0;
+    position: relative;
+}
+
+.turi-rag-checkbox:checked {
+    border-color: var(--turi-color-text-primary);
+    background-color: var(--turi-color-text-tertiary);
+}
+
+.turi-rag-checkbox:checked::after {
+    content: "";
+    width: 5px;
+    height: 9px;
+    border: solid var(--turi-color-background-secondary);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+}
+
+.turi-rag-checkbox:not(:disabled):hover {
+    border-color: var(--turi-color-text-primary);
+}
+
+.turi-rag-checkbox:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* system prompt */
+.turi-rag-prompt-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.turi-rag-prompt-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid var(--turi-color-border-primary);
+    border-radius: 8px;
+    background: var(--turi-color-background-primary);
+    cursor: pointer;
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.turi-rag-prompt-card:hover {
+    border-color: var(--turi-color-accent-light);
+    background: var(--turi-color-background-secondary);
+}
+
+.turi-rag-prompt-card:has(input:checked) {
+    border-color: var(--turi-color-accent);
+    background: var(--turi-color-background-active);
+    box-shadow: 0 0 0 1px var(--turi-color-accent);
+}
+
+.turi-rag-prompt-card input {
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.turi-rag-prompt-card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.turi-rag-prompt-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.turi-rag-prompt-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--turi-color-text-primary);
+}
+
+.turi-rag-prompt-temperature {
+    flex-shrink: 0;
+    font-size: 12px;
+    color: var(--turi-color-text-tertiary);
+}
+
+.turi-rag-prompt-description {
+    margin: 6px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--turi-color-text-secondary);
+}
+
+/* explanation_info */
+.turi-rag-info-block {
+    margin-top: 20px;
+}
+
+.turi-rag-note {
+    margin-top: 15px;
+    margin-bottom: 0;
+    padding: 12px 15px;
+    background-color: #f5f5f5;
+    border-left: 4px solid #6c757d;
+}
+
+
+/* progresbar */
+.turi-rag-stepper {
+    font-family: var(--turi-font);
+    color: var(--turi-color-text-primary);
+}
+
+.turi-rag-stepper .mdl-stepper-horizontal-alternative {
+    display: table;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.turi-rag-stepper .mdl-stepper-horizontal-alternative .mdl-stepper-step {
+    display: table-cell;
+    position: relative;
+    width: 20%;
+    padding: 24px;
+}
+
+.turi-rag-stepper .mdl-stepper-horizontal-alternative .mdl-stepper-step:hover,
+.turi-rag-stepper .mdl-stepper-horizontal-alternative .mdl-stepper-step:active {
+    background-color: var(--turi-color-background-tertiary);
+}
+
+.turi-rag-stepper .mdl-stepper-horizontal-alternative .mdl-stepper-step:first-child:active {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.turi-rag-stepper .mdl-stepper-horizontal-alternative .mdl-stepper-step:last-child:active {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Circle */
+.turi-rag-stepper .mdl-stepper-circle {
+    width: 24px;
+    height: 24px;
+    margin: 0 auto;
+    background-color: var(--turi-color-border-input);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 2em;
+    font-size: 12px;
+    color: var(--turi-color-text-secondary);
+}
+
+.turi-rag-stepper .mdl-stepper-step:hover .mdl-stepper-circle {
+    background-color: var(--turi-color-accent-hover);
+    color: #fff;
+}
+
+/* Active step */
+.turi-rag-stepper .mdl-stepper-step.active-step .mdl-stepper-circle {
+    background-color: var(--turi-color-accent);
+    color: #fff;
+}
+
+/* Completed step */
+.turi-rag-stepper .mdl-stepper-step.step-done .mdl-stepper-circle {
+    background-color: var(--turi-color-success-text);
+    color: #fff;
+}
+
+.turi-rag-stepper .mdl-stepper-step.step-done .mdl-stepper-circle:before {
+    content: "\2714";
+}
+
+.turi-rag-stepper .mdl-stepper-step.step-done .mdl-stepper-circle * {
+    display: none;
+}
+
+/* Editable step */
+.turi-rag-stepper .mdl-stepper-step.editable-step .mdl-stepper-circle {
+    transform: scaleX(-1);
+}
+
+.turi-rag-stepper .mdl-stepper-step.editable-step .mdl-stepper-circle:before {
+    content: "\270E";
+}
+
+.turi-rag-stepper .mdl-stepper-step.editable-step .mdl-stepper-circle * {
+    display: none;
+}
+
+/* Title */
+.turi-rag-stepper .mdl-stepper-title {
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    color: var(--turi-color-text-muted);
+}
+
+.turi-rag-stepper .mdl-stepper-step.active-step .mdl-stepper-title {
+    font-weight: 500;
+    color: var(--turi-color-text-primary);
+}
+
+.turi-rag-stepper .mdl-stepper-step.active-step.step-done .mdl-stepper-title,
+.turi-rag-stepper .mdl-stepper-step.active-step.editable-step .mdl-stepper-title {
+    font-weight: 300;
+}
+
+/* Connecting lines */
+.turi-rag-stepper .mdl-stepper-bar-left,
+.turi-rag-stepper .mdl-stepper-bar-right {
+    position: absolute;
+    top: 36px;
+    height: 1px;
+    border-top: 1px solid var(--turi-color-border-primary);
+}
+
+.turi-rag-stepper .mdl-stepper-bar-right {
+    right: 0;
+    left: 50%;
+    margin-left: 20px;
+}
+
+.turi-rag-stepper .mdl-stepper-bar-left {
+    left: 0;
+    right: 50%;
+    margin-right: 20px;
+}
+
+/* Hide first left and last right line */
+.turi-rag-stepper .mdl-stepper-step:first-child .mdl-stepper-bar-left,
+.turi-rag-stepper .mdl-stepper-step:last-child .mdl-stepper-bar-right {
+    display: none;
+}
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+
+@media (max-width: 767px) {
+
+    .turi-rag-profile-header {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .turi-rag-profile-header-actions {
+        width: 100%;
+    }
+
+    .turi-rag-profile-header-actions .turi-rag-button {
+        width: 100%;
+    }
+
+    .turi-rag-profile-documents {
+
+        padding: 20px;
+    }
+
+    .turi-rag-profile-title {
+        font-size: 20px;
+    }
+
+    .turi-rag-table th,
+    .turi-rag-table td {
+        padding: 11px 12px;
+    }
+
+    .turi-rag-profile-footer {
+        padding: 16px 20px;
+    }
+}

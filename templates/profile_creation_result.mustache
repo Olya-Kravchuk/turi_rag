@@ -1,0 +1,39 @@
+<div class="turi-rag-wrapper">
+    <div class="turi-rag-profile">
+
+        <div class="turi-rag-section-header">
+            <h2 class="turi-rag-subtitle">
+                {{#str}}ragprofilecreation, local_turi_rag{{/str}}
+            </h2>
+        </div>
+
+        {{#profileactive}}
+            <div class="turi-rag-profile-message turi-rag-profile-message-success">
+                <p>
+                    {{#str}}ragprofilesuccess, local_turi_rag{{/str}}
+                </p>
+            </div>
+        {{/profileactive}}
+
+        {{#profileinprogress}}
+            <div class="turi-rag-profile-message turi-rag-profile-message-info text-center p-3">
+                <!-- Стандартний спінер Moodle / Bootstrap -->
+                <div class="spinner-border text-primary mb-3" role="status" style="width: 2.5rem; height: 2.5rem;">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <p class="mb-0">
+                    {{#str}}ragprofilecreating, local_turi_rag{{/str}}
+                </p>
+            </div>
+        {{/profileinprogress}}
+
+        {{#profileinactive}}
+            <div class="turi-rag-profile-message">
+                <p>
+                    {{#str}}ragprofileinactive, local_turi_rag{{/str}}
+                </p>
+            </div>
+        {{/profileinactive}}
+
+    </div>
+</div>

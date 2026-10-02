@@ -1,0 +1,63 @@
+<div class="turi-rag-wrapper">
+    <div class="turi-rag-profile">
+
+        <div class="turi-rag-profile-header">
+
+            <div class="turi-rag-profile-info">
+
+                <h2 class="turi-rag-title">
+                    {{#str}}rag_profile_title, local_turi_rag{{/str}}
+                </h2>
+
+                <p class="turi-rag-description">
+                    {{#str}}rag_profile_description, local_turi_rag{{/str}}
+                </p>
+
+            </div>
+
+            {{#editurl}}
+            <div class="turi-rag-profile-header-actions">
+                <a
+                    href="{{removedocumentsurl}}"
+                    class="turi-rag-button turi-rag-button-primary">
+                    {{#str}}remove_documents, local_turi_rag{{/str}}
+                </a>
+                <a
+                    href="{{editurl}}"
+                    class="turi-rag-button turi-rag-button-secondary">
+                    {{#str}}edit_rag_profile, local_turi_rag{{/str}}
+                </a>
+            </div>
+            {{/editurl}}
+
+        </div>
+
+
+        <div class="turi-rag-profile-documents">
+
+            <div class="turi-rag-section-header">
+                <h3 class="turi-rag-subtitle">
+                    {{#str}}documents, local_turi_rag{{/str}}
+                </h3>
+            </div>
+
+            {{> local_turi_rag/document_table}}
+
+        </div>
+
+
+        {{#deleteurl}}
+        <div class="turi-rag-profile-footer">
+
+            <a
+                href="{{deleteurl}}"
+                class="turi-rag-button turi-rag-button-primary"
+                id="delete-profile-btn">
+                {{#str}}delete_rag_profile, local_turi_rag{{/str}}
+            </a>
+
+        </div>
+        {{/deleteurl}}
+
+    </div>
+</div>

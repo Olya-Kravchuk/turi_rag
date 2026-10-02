@@ -1,0 +1,95 @@
+<div class="turi-rag-wrapper">
+    <div class="turi-rag-profile">
+
+        <form method="post" action="{{finishurl}}">
+
+            <div class="turi-rag-section-header">
+                <h2 class="turi-rag-section-title">
+                    Prompt Einstellungen
+                </h2>
+            </div>
+
+            <div class="turi-rag-prompt-block-setting">
+
+                <p class="turi-rag-checkbox-description">
+                    Wenn der Prompt-Block aktiviert ist, wird er allen Kursteilnehmern angezeigt.
+                </p>
+                
+                <label>
+
+                    <input
+                        class="turi-rag-checkbox"
+                        type="checkbox"
+                        name="promptblock_enabled"
+                        value="1"
+                        {{#promptblock_enabled}}checked{{/promptblock_enabled}}>
+
+                    <span class="turi-rag-checkbox-label">
+                        Prompt-Block aktivieren
+                    </span>
+
+                </label>
+
+                <p class="turi-rag-section-description">
+                    Select a system prompt for this RAG profile.
+                </p>
+
+            </div>
+
+            <div class="turi-rag-prompt-list">
+
+                {{#systemprompts}}
+
+                    {{#system_prompt}}
+
+                    <label class="turi-rag-prompt-card">
+
+                        <input
+                            class="turi-rag-checkbox"
+                            type="radio"
+                            name="systemprompt"
+                            value="{{id}}"
+                            {{#selected}}checked{{/selected}}>
+
+                        <div class="turi-rag-prompt-card-content">
+
+                            <div class="turi-rag-prompt-card-header">
+
+                                <span class="turi-rag-prompt-name">
+                                    {{name}}
+                                </span>
+
+                                <span class="turi-rag-prompt-temperature">
+                                    Temperature: {{temp_min}} - {{temp_max}}
+                                </span>
+
+                            </div>
+
+                            <p class="turi-rag-prompt-description">
+                                {{description}}
+                            </p>
+
+                        </div>
+
+                    </label>
+
+                    {{/system_prompt}}
+
+                {{/systemprompts}}
+
+            </div>
+
+            <div class="turi-rag-system-prompt-actions">
+
+                <button
+                    type="submit"
+                    class="turi-rag-button turi-rag-button-secondary">
+                    Save
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
