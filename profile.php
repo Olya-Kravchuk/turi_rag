@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . '/../../config.php');
+require_once(__DIR__ . '/locallib.php');
 
 use local_turi_rag\local\turi_client;
 
@@ -13,13 +14,36 @@ require_login($course);
 
 $context = context_course::instance($course->id);
 
+require_capability(
+    'local/turi_rag:managerag',
+    context_course::instance($courseid)
+);
+
+$turi = new turi_client();
+
 if ($action === 'delete') {
     confirm_sesskey();
 
     try {
-        $success = turi_client::delete_profile((string)$courseid);
+        $success = $turi->delete_profile((string)$courseid);
 
         if ($success) {
+            $record = $DB->get_record(
+                'local_turi_course',
+                ['courseid' => $courseid],
+                '*',
+                IGNORE_MISSING
+            );
+
+            if ($record) {
+                $record->promptenabled = 0;
+                $record->timemodified = time();
+
+                $DB->update_record(
+                    'local_turi_course',
+                    $record
+                );
+            }
 
             redirect(
                 new moodle_url('/local/turi_rag/profile.php', ['courseid' => $courseid]),
@@ -64,7 +88,7 @@ $PAGE->requires->js_call_amd('local_turi_rag/delete_confirm', 'init', ['#delete-
 echo $OUTPUT->header();
 
 try {
-    $status = turi_client::get_rag_status((string)$courseid);
+    $status = $turi->get_rag_status((string)$courseid);
     
     $SESSION->local_turi_rag_creation_status = $status;
     // $status = turi_client::get_rag_status((string)'9876');
@@ -112,6 +136,12 @@ echo $OUTPUT->render_from_template('local_turi_rag/tabs', [
 
 
 if ($profilestatus === 'active') {
+    $ragdocuments = $status['documents'] ?? [];
+
+    $missingdocuments = local_turi_rag_find_missing_documents(
+        $courseid,
+        $ragdocuments
+    );
 
     $data = [
         // 'documents' => $documents,
@@ -147,6 +177,18 @@ if ($profilestatus === 'active') {
         'local_turi_rag/profile',
         $data
     );
+    if (!empty($missingdocuments)) {
+        if (!empty($missingdocuments)) {
+            echo $OUTPUT->render_from_template(
+                'local_turi_rag/missing_documents',
+                [
+                    'documents' => $missingdocuments,
+                    'showcheckbox' => false,
+                    'showdocumentid' => true,
+                ]
+            );
+        }
+    }
 
     echo '<details>';
     echo '<summary>Response</summary>';

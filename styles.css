@@ -67,6 +67,7 @@
     gap: 28px;
     border-bottom: 1px solid var(--turi-color-border-secondary);
     margin-bottom: 24px;
+    margin-left: 350px;
 }
 
 .turi-rag-tab {
@@ -107,7 +108,7 @@
     flex-direction: column;
     border: 1px solid var(--turi-color-border-primary);
     border-radius: 8px;
-    width: 80%;
+    width: 60%;
     padding: 30px;
     font-family: var(--turi-font);
     color: var(--turi-color-text-primary);
@@ -136,13 +137,10 @@
     font-weight: 600;
     line-height: 1.3;
 }
-.turi-rag-title
-.turi-rag-subtitle
-.turi-rag-description
-.turi-rag-text  
+
 .turi-rag-description {
-    max-width: 760px;
-    margin: 0;
+    max-width: 900px;
+    margin: 0 0 8px;
     color: var(--turi-color-text-secondary);
     font-size: 14px;
     line-height: 1.6;
@@ -166,7 +164,7 @@
 }
 
 .turi-rag-subtitle {
-    margin: 0;
+    /* margin: 0; */
     color: var(--turi-color-text-primary);
     font-size: 17px;
     font-weight: 600;
@@ -179,6 +177,7 @@
     justify-content: center;
     min-height: 38px;
     padding: 8px 16px;
+    margin-top: 10px;
     border-radius: 5px;
     font-family: var(--turi-font);
     font-size: 14px;
@@ -429,7 +428,7 @@
 
 /* explanation_info */
 .turi-rag-info-block {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .turi-rag-note {
@@ -449,7 +448,7 @@
 
 .turi-rag-stepper .mdl-stepper-horizontal-alternative {
     display: table;
-    width: 100%;
+    width: 70%;
     margin: 0 auto;
 }
 
@@ -576,36 +575,26 @@
    Responsive
    --------------------------------------------------------- */
 
+@media (max-width: 1440px) {
+    .container {
+        width: 100%;
+        padding: 0 24px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .documents {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
+
 @media (max-width: 767px) {
-
-    .turi-rag-profile-header {
-        flex-direction: column;
-        padding: 20px;
+    .documents {
+        grid-template-columns: 1fr;
     }
 
-    .turi-rag-profile-header-actions {
-        width: 100%;
-    }
-
-    .turi-rag-profile-header-actions .turi-rag-button {
-        width: 100%;
-    }
-
-    .turi-rag-profile-documents {
-
-        padding: 20px;
-    }
-
-    .turi-rag-profile-title {
-        font-size: 20px;
-    }
-
-    .turi-rag-table th,
-    .turi-rag-table td {
-        padding: 11px 12px;
-    }
-
-    .turi-rag-profile-footer {
-        padding: 16px 20px;
+    .container {
+        padding: 0 16px;
     }
 }

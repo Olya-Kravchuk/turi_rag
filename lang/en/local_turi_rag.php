@@ -38,6 +38,9 @@ $string['document_id'] = 'Document ID';
 $string['document_name'] = 'Document name';
 $string['file_name'] = 'File name';
 
+$string['missing_rag_documents'] = 'Documents deleted from Moodle';
+$string['missing_rag_documents_description'] = 'These documents still exist in the RAG profile but have been deleted from Moodle.';
+
 // ptofile_edit
 $string['edit_rag_profile_description'] = 'Documents marked with a checkmark have already been added to the RAG profile. If you want to add more documents, select them.';
 $string['save'] = 'Save';
@@ -49,7 +52,6 @@ $string['cancel'] = 'Cancel';
 $string['continue'] = 'Continue';
 
 // profile_remove_documents
-$string['remove_documents'] = 'Remove documents';
 $string['remove_documents_description'] = 'Select the documents you want to remove from the RAG profile.';
 $string['delete'] = 'Delete';
 $string['documents_removed_success'] = 'Selected documents have been successfully removed.';
@@ -76,11 +78,12 @@ $string['activate_ai_assistant'] = 'Activate the AI Assistant';
 $string['activate_ai_assistant_desc'] = 'After creating the RAG profile, you need to activate the AI Assistant block in the course. Only then will learners enrolled in the course be able to use the AI Assistant.';
 $string['select_system_prompt'] = 'Select System Prompt';
 $string['select_system_prompt_desc'] = 'Select a suitable system prompt to define the role and behavior of the AI. The system prompt determines how the AI should respond to questions and which rules, requirements, or restrictions it must consider when generating its responses. Depending on the selected prompt, the AI may, for example, be more strictly limited to the provided documents or respond with fewer restrictions.';
-$string['delete_rag_profile'] = 'Delete RAG Profile';
 $string['delete_rag_profile_desc'] = 'When a RAG profile is deleted, all documents associated with the profile are also deleted. In addition, the usage history of the RAG profile is removed. This includes previous questions and interactions of users who have used the RAG profile.';
 $string['note'] = 'Note:';
 $string['delete_rag_profile_note'] = 'The deletion of a RAG profile should therefore be carefully considered, as the associated documents and usage history will not be retained.';
 
+// profile_creation_guide
+$string['err_nodocuments'] = 'Please select at least one document for the RAG profile.';
 
 // profile_creation_result.mustache
 $string['ragprofilecreation'] = 'Create RAG profile';
@@ -88,10 +91,22 @@ $string['ragprofilesuccess'] = 'You have successfully created the RAG profile.';
 $string['ragprofilecreating'] = 'The RAG profile is being created.';
 $string['ragprofileinactive'] = 'No RAG profile has been created for this course yet.';
 
+//system_prompt.mustache
+$string['prompt_settings'] = 'Prompt settings';
+$string['prompt_block_description'] = 'When the prompt block is enabled, it is displayed to all course participants.';
+$string['enable_prompt_block'] = 'Enable prompt block';
+$string['choose_system_prompt'] = 'Select a system prompt for this RAG profile.';
+$string['temperature'] = 'Temperature';
+
+$string['nochangesdetected'] = 'No changes detected.';
+$string['changessavedsuccessfully'] = 'Changes saved successfully.';
+$string['blockvisibilityupdated'] = 'Block visibility updated.';
+$string['systempromptupdated'] = 'System prompt updated.';
+
 // wizard_progress.mustache
 $string['step_start'] = 'Start';
 $string['documents_selected'] = 'Documents selected';
-$string['rag_profile_creation'] = 'RAG profile creation';
+$string['rag_profile_preparing_documents'] = 'Preparing documents';
 $string['system_prompt'] = 'System prompt';
 $string['completed'] = 'Completed';
 
@@ -107,6 +122,10 @@ $string['turi_invalid_response'] = 'The TURI service returned an unexpected resp
 
 $string['profile_delete_accepted'] = 'The deletion request has been accepted. The profile will be removed shortly.';
 $string['error_deleting_profile'] = 'An error occurred while attempting to delete the RAG profile. Please try again later.';
+
+// profile_creation.js
+$string['rag_creation_error'] = 'An error occurred while creating the RAG profile.';
+$string['rag_inactive_error'] = 'The RAG profile is inactive.';
 
 // profile_notification.js
 $string['rag_status_success'] = 'RAG profile creation completed successfully! Redirecting...';

@@ -14,12 +14,17 @@ function local_turi_rag_extend_navigation_course(
     stdClass $course,
     context_course $context
 ) {
+
+    if (!has_capability('local/turi_rag:managerag', $context)) {
+        return;
+    }
+    
     $url = new moodle_url('/local/turi_rag/profile.php', [
         'courseid' => $course->id,
     ]);
 
     $navigation->add(
-        get_string('ragprofile', 'local_turi_rag'),
+        get_string('pluginname', 'local_turi_rag'),
         $url,
         navigation_node::TYPE_CUSTOM,
         'local_turi_rag',

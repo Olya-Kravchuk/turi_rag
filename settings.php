@@ -3,6 +3,16 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
+    $secretsalt = get_config('local_turi_rag', 'secret_salt');
+    if (empty($secretsalt)) {
+        $secretsalt = bin2hex(random_bytes(32));
+
+        set_config(
+            'secret_salt',
+            $secretsalt,
+            'local_turi_rag'
+        );
+    }
 
     $settings = new admin_settingpage(
         'local_turi_rag',

@@ -15,16 +15,18 @@ if ($status === null) {
 }
 
 $systemprompts = $status['system_prompts'] ?? [];
-
 $profilestatus = $status['course_status'] ?? 'inactive';
 
 $course = get_course($courseid);
-
 require_login($course);
 
-/*
- * Get documents available in the course.
- */
+require_capability(
+    'local/turi_rag:managerag',
+    context_course::instance($courseid)
+);
+
+$turi = new turi_client();
+
 $modinfo = get_fast_modinfo($course->id);
 $fs = get_file_storage();
 
@@ -62,21 +64,25 @@ foreach ($modinfo->get_instances_of('resource') as $cm) {
         ];
     }
 }
+if ($action === 'create') {
+    $selecteddocuments = optional_param_array('documents', [], PARAM_INT);
+    if (empty($selecteddocuments)) {
+        redirect(
+            new moodle_url('/local/turi_rag/profile_creation_guide.php', [
+                'courseid' => $courseid,
+                'action' => 'start',
+                'error' => 'nodocuments'
+            ])
+        );
+    }
+}
 
-
-/*
- * Default data.
- */
 $data = [
     'documents' => $documents,
-
     'systemprompts' => $systemprompts,
-
     'showcheckbox' => true,
     'showdocumentid' => false,
-
     'currentstep' => 2,
-
     'createurl' => (new moodle_url(
         '/local/turi_rag/profile_creation_guide.php',
         [
@@ -100,32 +106,20 @@ $data = [
         ]
     ))->out(false),
 
-
     'sesskey' => sesskey(),
 ];
 
+$haserror = optional_param('error', '', PARAM_ALPHA);
+
 echo $OUTPUT->header();
 
-// try {
-//     $status = turi_client::get_rag_status((string)$courseid);
-// } catch (moodle_exception $e) {
-//     echo $OUTPUT->notification(
-//         $e->getMessage(),
-//         \core\output\notification::NOTIFY_ERROR
-//     );
+if ($haserror === 'nodocuments') {
+    echo $OUTPUT->notification(
+        get_string('err_nodocuments', 'local_turi_rag'),
+        \core\output\notification::NOTIFY_ERROR
+    );
+}
 
-//     echo $OUTPUT->footer();
-//     exit;
-// }
-
-// $profilestatus = $status['course_status'] ?? 'inactive';
-// $profilestatus = "active";
-// $profilestatus = "inactive";
-// $profilestatus = "inProgress";
-
-/*
- * Handle wizard action.
- */
 switch ($action) {
 
     case 'start':
@@ -228,7 +222,6 @@ switch ($action) {
         ];
         $payload = [
             'id' => (string)$courseid,
-            'modus' => 'create',
             'course_metadata' => $coursemetadata,
             'documents' => $selectedfiles,
         ];
@@ -236,13 +229,20 @@ switch ($action) {
 
         try {
             // echo '<details open>';
-            // echo '<summary>Request sent to TURI</summary>';
+            // echo '<summary><strong>Request: init_session()</strong></summary>';
             // echo '<pre>';
             // print_r($payload);
             // echo '</pre>';
             // echo '</details>';
 
-            $result = turi_client::init_session($payload);
+            $result = $turi->init_session('create', $payload);
+
+            // echo '<details open>';
+            // echo '<summary><strong>Response: init_session()</strong></summary>';
+            // echo '<pre>';
+            // print_r($result);
+            // echo '</pre>';
+            // echo '</details>';
 
             $sessionid = (string)($result['id'] ?? $courseid);
 
@@ -265,14 +265,57 @@ switch ($action) {
                 throw new moodle_exception('invalidparameter');
             }
 
-            $uploadresult = turi_client::upload_files(
+            // echo '<details open>';
+            // echo '<summary><strong>Request: upload_files()</strong></summary>';
+            // echo '<pre>';
+            // echo "Session ID:\n";
+            // echo $sessionid . "\n\n";
+            // echo "Files:\n";
+
+            // foreach ($selectedmoodlefiles as $file) {
+            //     echo 'ID: ' . $file->get_id() . "\n";
+            //     echo 'Filename: ' . $file->get_filename() . "\n";
+            //     echo 'Mimetype: ' . $file->get_mimetype() . "\n";
+            //     echo 'Size: ' . $file->get_filesize() . " bytes\n";
+            //     echo "-------------------------\n";
+            // }
+            // echo '</pre>';
+            // echo '</details>';
+
+            $uploadresult = $turi->upload_files(
                 $sessionid,
                 $selectedmoodlefiles
             );
 
-            $completeresult = turi_client::complete_session(
+            // echo '<details open>';
+            // echo '<summary><strong>Response: upload_files()</strong></summary>';
+            // echo '<pre>';
+            // print_r($uploadresult);
+            // echo '</pre>';
+            // echo '</details>';
+
+            // echo '<details open>';
+            // echo '<summary><strong>Request: complete_session()</strong></summary>';
+            // echo '<pre>';
+            // echo "Session ID: ";
+            // echo $sessionid;
+            // echo "\n";
+            // echo '</pre>';
+            // echo '</details>';
+
+            $completeresult = $turi->complete_session(
                 $sessionid
             );
+
+            // echo '<details open>';
+            // echo '<summary><strong>Response: complete_session()</strong></summary>';
+            // echo '<pre>';
+            // print_r($completeresult);
+            // echo '</pre>';
+            // echo '</details>';
+
+            $creationstarted = (($completeresult['status'] ?? '') === 'started');
+
 
             $SESSION->local_turi_rag_creation_result = [
                 'init' => $result,
@@ -300,23 +343,22 @@ switch ($action) {
         
 
         $data['currentstep'] = 6;
+        $data['profileinprogress'] = true;
+        $data['profileactive'] = false;
+        $data['profileinactive'] = false;
 
+        $statusurl = (new moodle_url('/local/turi_rag/check_status.php', [
+            'courseid' => $courseid,
+            'promptblock_enabled' => $promptblockenabled,
+        ]))->out(false);
+
+        $redirecturl = (new moodle_url('/local/turi_rag/profile.php', [
+            'courseid' => $courseid,
+        ]))->out(false);
+
+        $data['statusurl'] = $statusurl;
+        $data['redirecturl'] = $redirecturl;
     
-        $data['profilestatus'] = $profilestatus;
-
-        $data['profileactive'] = ($profilestatus === 'active');
-
-        $data['profileinprogress'] = ($profilestatus === 'inprogress');
-
-        $data['profileinactive'] = ($profilestatus === 'inactive');
-
-        $data['redirecturl'] = (new moodle_url(
-            '/local/turi_rag/profile.php',
-            [
-                'courseid' => $courseid,
-            ]
-        ))->out(false);
-
         break;
 
     default:
@@ -331,12 +373,20 @@ $PAGE->requires->js_call_amd(
 );
 
 if ($action === 'finish') {
+    // $PAGE->requires->js_call_amd(
+    //     'local_turi_rag/profile_notification',
+    //     'init',
+    //     [
+    //         $data['redirecturl'],
+    //         5000,
+    //     ]
+    // );
     $PAGE->requires->js_call_amd(
-        'local_turi_rag/profile_notification',
+        'local_turi_rag/profile_creation',
         'init',
         [
-            $data['redirecturl'],
-            3000,
+            $data['statusurl'],
+            $data['redirecturl']
         ]
     );
 }
@@ -346,9 +396,6 @@ echo $OUTPUT->render_from_template(
     $data
 );
 
-/*
- * Render current wizard content.
- */
 switch ($action) {
 
     case 'start':
@@ -357,7 +404,7 @@ switch ($action) {
             $data
         );
         
-        $formats = turi_client::get_allowed_formats();
+        $formats = $turi->get_allowed_formats();
 
         echo '<details>';
         echo '<summary>Response</summary>';
@@ -366,21 +413,6 @@ switch ($action) {
         echo '</pre>';
         echo '</details>';
         break;
-
-    // case 'documents':
-    //     $selecteddocuments = optional_param_array(
-    //         'documents',
-    //         [],
-    //         PARAM_INT
-    //     );
-
-    //     if (empty($selecteddocuments)) {
-    //         throw new moodle_exception('invalidparameter');
-    //     }
-
-    //     $data['selecteddocuments'] = $selecteddocuments;
-    //     $data['currentstep'] = 3;
-    //     break;
 
     case 'create':
         echo $OUTPUT->render_from_template(
@@ -395,7 +427,12 @@ switch ($action) {
             'local_turi_rag/profile_creation_result',
             $data
         );
-
+        echo '<details>';
+        echo '<summary>Response</summary>';
+        echo '<pre>';
+        print_r($status);
+        echo '</pre>';
+        echo '</details>';
         break;
 }
 

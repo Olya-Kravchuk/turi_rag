@@ -35,6 +35,9 @@ $string['document_id'] = 'Dokument-ID';
 $string['document_name'] = 'Dokumentname';
 $string['file_name'] = 'Dateiname';
 
+$string['missing_rag_documents'] = 'Dokumente, die aus Moodle gelöscht wurden';
+$string['missing_rag_documents_description'] = 'Diese Dokumente sind weiterhin im RAG-Profil vorhanden, wurden jedoch aus Moodle gelöscht.';
+
 // ptofile_edit.mustache
 $string['edit_rag_profile_description'] = 'Dokumente, die mit einem Häkchen gekennzeichnet sind, wurden bereits zum RAG-Profil hinzugefügt. Wenn Sie weitere Dokumente hinzufügen möchten, wählen Sie diese aus.';
 $string['save'] = 'Speichern';
@@ -46,7 +49,6 @@ $string['cancel'] = 'Abbrechen';
 $string['continue'] = 'Weiter';
 
 // profile_remove_documents
-$string['remove_documents'] = 'Dokumente entfernen';
 $string['remove_documents_description'] = 'Wählen Sie die Dokumente aus, die Sie aus dem RAG-Profil entfernen möchten.';
 $string['delete'] = 'Löschen';
 $string['documents_removed_success'] = 'Die ausgewählten Dokumente wurden erfolgreich entfernt.';
@@ -73,10 +75,12 @@ $string['activate_ai_assistant'] = 'KI-Assistenten aktivieren';
 $string['activate_ai_assistant_desc'] = 'Nach der Erstellung des RAG-Profils muss der KI-Assistent-Block im Kurs aktiviert werden. Erst danach können die im Kurs eingeschriebenen Teilnehmer den KI-Assistenten nutzen.';
 $string['select_system_prompt'] = 'System-Prompt auswählen';
 $string['select_system_prompt_desc'] = 'Wählen Sie einen passenden System-Prompt aus, um die Rolle und das Verhalten der KI festzulegen. Der System-Prompt bestimmt, wie die KI auf Fragen reagieren soll und welche Regeln, Vorgaben oder Einschränkungen sie bei ihren Antworten berücksichtigen muss. Je nach gewähltem Prompt kann die KI beispielsweise stärker auf die bereitgestellten Dokumente beschränkt werden oder mit weniger Einschränkungen antworten.';
-$string['delete_rag_profile'] = 'RAG-Profil löschen';
 $string['delete_rag_profile_desc'] = 'Beim Löschen eines RAG-Profils werden auch alle mit diesem Profil verknüpften Dokumente gelöscht. Zusätzlich wird die Nutzungshistorie des RAG-Profils entfernt. Dazu gehören auch die bisherigen Fragen und Interaktionen der Nutzer, die das RAG-Profil verwendet haben.';
 $string['note'] = 'Hinweis:';
 $string['delete_rag_profile_note'] = 'Das Löschen eines RAG-Profils sollte daher sorgfältig geprüft werden, da die zugehörigen Dokumente und die Nutzungshistorie nicht erhalten bleiben.';
+
+// profile_creation_guide
+$string['err_nodocuments'] = 'Bitte wählen Sie mindestens ein Dokument für das RAG-Profil aus.';
 
 // profile_creation_result.mustache
 $string['ragprofilecreation'] = 'RAG-Profil erstellen';
@@ -84,10 +88,22 @@ $string['ragprofilesuccess'] = 'Sie haben das RAG-Profil erfolgreich erstellt.';
 $string['ragprofilecreating'] = 'Das RAG-Profil wird erstellt.';
 $string['ragprofileinactive'] = 'Es wurde noch kein RAG-Profil für diesen Kurs erstellt.';
 
+//system_prompt.mustache
+$string['prompt_settings'] = 'Prompt-Einstellungen';
+$string['prompt_block_description'] = 'Wenn der Prompt-Block aktiviert ist, wird er allen Kursteilnehmern angezeigt.';
+$string['enable_prompt_block'] = 'Prompt-Block aktivieren';
+$string['choose_system_prompt'] = 'Wählen Sie einen System-Prompt für dieses RAG-Profil aus.';
+$string['temperature'] = 'Temperatur';
+
+$string['nochangesdetected'] = 'Keine Änderungen festgestellt.';
+$string['changessavedsuccessfully'] = 'Änderungen erfolgreich gespeichert.';
+$string['blockvisibilityupdated'] = 'Sichtbarkeit des Blocks aktualisiert.';
+$string['systempromptupdated'] = 'System-Prompt aktualisiert.';
+
 // wizard_progress.mustache
 $string['step_start'] = 'Start';
 $string['documents_selected'] = 'Dokumente ausgewählt';
-$string['rag_profile_creation'] = 'RAG-Profil erstellen';
+$string['rag_profile_preparing_documents'] = 'Dokumente vorbereitet';
 $string['system_prompt'] = 'System-Prompt';
 $string['completed'] = 'Abgeschlossen';
 
@@ -103,6 +119,10 @@ $string['turi_invalid_response'] = 'Der TURI-Dienst hat eine unerwartete Antwort
 
 $string['profile_delete_accepted'] = 'Der Löschauftrag wurde angenommen. Das Profil wird in Kürze entfernt.';
 $string['error_deleting_profile'] = 'Beim Löschen des RAG-Profils ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.';
+
+// profile_creation.js
+$string['rag_creation_error'] = 'Beim Erstellen des RAG-Profils ist ein Fehler aufgetreten.';
+$string['rag_inactive_error'] = 'Das RAG-Profil ist inaktiv.';
 
 // profile_notification.js
 $string['rag_status_success'] = 'Erstellung des RAG-Profils erfolgreich abgeschlossen! Weiterleitung...';

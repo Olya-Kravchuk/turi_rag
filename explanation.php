@@ -2,8 +2,6 @@
 
 require_once(__DIR__ . '/../../config.php');
 
-use local_turi_rag\local\turi_client;
-
 $courseid = required_param('courseid', PARAM_INT);
 
 $course = get_course($courseid);
@@ -12,7 +10,10 @@ require_login($course);
 
 $context = context_course::instance($course->id);
 
-// require_capability('local/turi_rag:view', $context);
+require_capability(
+    'local/turi_rag:managerag',
+    context_course::instance($courseid)
+);
 
 $PAGE->set_url(
     new moodle_url('/local/turi_rag/explanation.php', [
@@ -26,21 +27,14 @@ $PAGE->set_heading($course->fullname);
 
 echo $OUTPUT->header();
 
-try {
-    $status = turi_client::get_rag_status((string)$courseid);
-} catch (moodle_exception $e) {
+$status = $SESSION->local_turi_rag_creation_status ?? null;
 
-    echo $OUTPUT->notification(
-        $e->getMessage(),
-        \core\output\notification::NOTIFY_ERROR
-    );
-
-    echo $OUTPUT->footer();
-    exit;
+if ($status === null) {
+    throw new moodle_exception('invalidparameter');
 }
 
-// $profilestatus = $status['course_status'] ?? 'inactive';
-$profilestatus = "active";
+$profilestatus = $status['course_status'] ?? 'inactive';
+// $profilestatus = "active";
 // $profilestatus = "inactive";
 // $profilestatus = "inProgress";
 

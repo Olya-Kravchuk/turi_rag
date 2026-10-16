@@ -2,17 +2,18 @@
     <div class="turi-rag-profile">
 
         <form method="post" action="{{finishurl}}">
+            <input type="hidden" name="sesskey" value="{{sesskey}}">
 
             <div class="turi-rag-section-header">
-                <h2 class="turi-rag-section-title">
-                    Prompt Einstellungen
+                <h2 class="turi-rag-title">
+                    {{#str}}prompt_settings, local_turi_rag{{/str}}
                 </h2>
             </div>
 
             <div class="turi-rag-prompt-block-setting">
 
-                <p class="turi-rag-checkbox-description">
-                    Wenn der Prompt-Block aktiviert ist, wird er allen Kursteilnehmern angezeigt.
+                <p class="turi-rag-subtitle">
+                    {{#str}}prompt_block_description, local_turi_rag{{/str}}
                 </p>
                 
                 <label>
@@ -25,13 +26,13 @@
                         {{#promptblock_enabled}}checked{{/promptblock_enabled}}>
 
                     <span class="turi-rag-checkbox-label">
-                        Prompt-Block aktivieren
+                        {{#str}}enable_prompt_block, local_turi_rag{{/str}}
                     </span>
 
                 </label>
 
-                <p class="turi-rag-section-description">
-                    Select a system prompt for this RAG profile.
+                <p class="turi-rag-subtitle">
+                    {{#str}}choose_system_prompt, local_turi_rag{{/str}}
                 </p>
 
             </div>
@@ -60,12 +61,12 @@
                                 </span>
 
                                 <span class="turi-rag-prompt-temperature">
-                                    Temperature: {{temp_min}} - {{temp_max}}
+                                    {{#str}}temperature, local_turi_rag{{/str}}: {{temp_min}} - {{temp_max}}
                                 </span>
 
                             </div>
 
-                            <p class="turi-rag-prompt-description">
+                            <p class="turi-rag-description">
                                 {{description}}
                             </p>
 
@@ -84,7 +85,7 @@
                 <button
                     type="submit"
                     class="turi-rag-button turi-rag-button-secondary">
-                    Save
+                    {{#str}}save, local_turi_rag{{/str}}
                 </button>
 
             </div>
