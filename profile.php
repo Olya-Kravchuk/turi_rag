@@ -27,6 +27,13 @@ if ($action === 'delete') {
     try {
         $success = $turi->delete_profile((string)$courseid);
 
+        echo '<details open>';
+        echo '<summary>Response</summary>';
+        echo '<pre>';
+        print_r($success);
+        echo '</pre>';
+        echo '</details>';
+        exit;
         if ($success) {
             $record = $DB->get_record(
                 'local_turi_course',

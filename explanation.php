@@ -34,9 +34,6 @@ if ($status === null) {
 }
 
 $profilestatus = $status['course_status'] ?? 'inactive';
-// $profilestatus = "active";
-// $profilestatus = "inactive";
-// $profilestatus = "inProgress";
 
 echo $OUTPUT->render_from_template('local_turi_rag/tabs', [
     'ragprofileurl' => new moodle_url('/local/turi_rag/profile.php', [

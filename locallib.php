@@ -1,16 +1,6 @@
 <?php
 
-/**
- * Find RAG documents that no longer exist in Moodle.
- *
- * @param int $courseid Moodle course ID.
- * @param array $ragdocuments Documents stored in the RAG profile.
- * @return array Documents missing in Moodle.
- */
-function local_turi_rag_find_missing_documents(
-    int $courseid,
-    array $ragdocuments
-): array {
+function local_turi_rag_find_missing_documents(int $courseid, array $ragdocuments): array {
     $modinfo = get_fast_modinfo($courseid);
     $fs = get_file_storage();
     $moodlefileids = [];
@@ -43,10 +33,7 @@ function local_turi_rag_find_missing_documents(
     foreach ($ragdocuments as $document) {
         $documentid = (string)($document['document_id'] ?? '');
 
-        if (
-            $documentid !== '' &&
-            !in_array($documentid, $moodlefileids, true)
-        ) {
+        if ($documentid !== '' && !in_array($documentid, $moodlefileids, true)) {
             $missingdocuments[] = $document;
         }
     }

@@ -169,7 +169,6 @@ switch ($action) {
                 'document_name' => $documentname,
                 'file_name' => $filename,
                 'file_extension' => $extension,
-                // 'author' => '',
             ];
 
             $selectedmoodlefiles[] = $file;
@@ -212,10 +211,17 @@ switch ($action) {
         if (empty($selectedfiles)) {
             throw new moodle_exception('invalidparameter');
         }
+        $creator = \core_user::get_user($course->userid);
+
+        $instructor = '';
+
+        if ($creator) {
+            $instructor = fullname($creator);
+        }
         $coursemetadata = [
             'course_id' => (string)$courseid,
             'course_name' => $course->fullname,
-            'instructor' => '',
+            'instructor' => $instructor,
             'semester' => '',
             'module_type' => '',
             'system_prompt_id' => $systempromptid,

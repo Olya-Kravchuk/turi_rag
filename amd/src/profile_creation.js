@@ -40,12 +40,12 @@ export const init = (statusUrl, redirectUrl) => {
                 return;
             }
 
-            if (status === 'inactive') {
-                showError('rag_inactive_error');
-                return;
-            }
+            // if (status === 'inactive') {
+            //     showError('rag_inactive_error');
+            //     return;
+            // }
 
-            if (['inprogress'].includes(status)) {
+            if (['inprogress', 'inactive'].includes(status)) {
                 setTimeout(checkStatus, 3000);
                 return;
             }

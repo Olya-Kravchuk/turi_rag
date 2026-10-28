@@ -225,7 +225,7 @@ if ($action === 'save') {
             // );
         }
 
-        redirect(new moodle_url('/local/turi_rag/profile.php', ['courseid' => $courseid]));
+        // redirect(new moodle_url('/local/turi_rag/profile.php', ['courseid' => $courseid]));
     } catch (\Throwable $e) {
         print_error($e->getMessage(), 'local_turi_rag');
     }

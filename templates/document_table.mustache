@@ -1,7 +1,6 @@
 <div class="turi-rag-table-wrapper">
 
     <table class="turi-rag-table">
-
         <thead>
             <tr class="turi-rag-table-header">
 
@@ -27,9 +26,7 @@
         </thead>
 
         <tbody>
-
         {{#documents}}
-
             <tr class="turi-rag-table-row">
 
                 {{#showdocumentid}}
@@ -42,29 +39,23 @@
                     <td class="turi-rag-table-cell turi-rag-table-action cell-center">
 
                         {{#supported}}
-
                             {{#disabled}}
-
                                 <input
                                     type="checkbox"
                                     class="turi-rag-checkbox"
                                     checked
                                     disabled
                                 >
-
                             {{/disabled}}
 
                             {{^disabled}}
-
                                 <input
                                     type="checkbox"
                                     class="turi-rag-checkbox"
                                     name="documents[]"
                                     value="{{id}}"
                                 >
-
                             {{/disabled}}
-
                         {{/supported}}
 
                         {{^supported}}
@@ -92,7 +83,5 @@
         {{/documents}}
 
         </tbody>
-
     </table>
-
 </div>

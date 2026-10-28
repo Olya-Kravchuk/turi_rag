@@ -9,12 +9,6 @@ use local_turi_rag\local\turi_client;
 
 class hook_listener {
 
-    /**
-     * Delete TURI RAG profile before the course is deleted.
-     *
-     * @param before_course_deleted $hook
-     * @return void
-     */
     public static function before_course_deleted(before_course_deleted $hook): void {
         global $DB;
 
@@ -29,11 +23,7 @@ class hook_listener {
             $turi = new turi_client();
             $turi->delete_profile((string)$courseid);
         } catch (\Exception $e) {
-            debugging(
-                'Failed to delete TURI RAG profile for course ' . $courseid .
-                ': ' . $e->getMessage(),
-                DEBUG_DEVELOPER
-            );
+            debugging('Failed to delete TURI RAG profile for course ' . $courseid . ': ' . $e->getMessage(), DEBUG_DEVELOPER);
         }
     }
 }

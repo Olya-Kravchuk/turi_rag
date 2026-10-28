@@ -7,31 +7,20 @@ require('../../config.php');
 use local_turi_rag\local\turi_http_client;
 use local_turi_rag\local\turi_status_client;
 
-$courseid = required_param(
-    'courseid',
-    PARAM_INT
-);
+$courseid = required_param('courseid', PARAM_INT);
 
-$promptenabled = optional_param(
-    'promptblock_enabled',
-    0,
-    PARAM_INT
-);
+$promptenabled = optional_param('promptblock_enabled', 0, PARAM_INT);
 
 $course = get_course($courseid);
 
 require_login($course);
 
 $http = new turi_http_client();
-
-$turi = new turi_status_client(
-    $http
-);
+$turi = new turi_status_client($http);
 
 header('Content-Type: application/json; charset=utf-8');
 
 try {
-
     $statusdata = $turi->get_rag_status((string)$courseid);
 
     $status = strtolower($statusdata['course_status'] ?? 'unknown');
@@ -46,12 +35,9 @@ try {
         );
 
         if ($existing) {
+            $existing->promptenabled = $promptenabled;
 
-            $existing->promptenabled =
-                $promptenabled;
-
-            $existing->timemodified =
-                time();
+            $existing->timemodified = time();
 
             $DB->update_record(
                 'local_turi_course',

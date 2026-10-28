@@ -27,6 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $docids = optional_param_array('documents', [], PARAM_TEXT);
 
+    $docids = array_values(array_filter(
+        array_map('strval', $docids),
+        static fn($id) => $id !== ''
+    ));
+
     echo '<details open>';
     echo '<summary><strong>1. Received from Moodle</strong></summary>';
     echo '<pre>';
@@ -35,44 +40,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo '</details>';
 
     if (!empty($docids)) {
-
-        foreach ($docids as $docid) {
-
-            $docid = (string)$docid;
+        try {
+            $result = $turi->single_delete(
+                (string) $courseid,
+                $docids
+            );
 
             echo '<details open>';
-            echo '<summary><strong>2. Sent to TURI</strong></summary>';
+            echo '<summary><strong>3. Received from TURI</strong></summary>';
             echo '<pre>';
-            echo "Endpoint: /api/embedding/entry_singleDelete\n";
-            echo "Data:\n";
+            print_r($result);
+            echo '</pre>';
+            echo '</details>';
+        } catch (\Throwable $e) {
+
+            echo '<details open>';
+            echo '<summary><strong>3. TURI Error</strong></summary>';
+            echo '<pre>';
             print_r([
-                'id' => $docid,
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
             ]);
             echo '</pre>';
             echo '</details>';
-            try {
-
-                $result = $turi->single_delete($docid);
-
-                echo '<details open>';
-                echo '<summary><strong>3. Received from TURI</strong></summary>';
-                echo '<pre>';
-                print_r($result);
-                echo '</pre>';
-                echo '</details>';
-            } catch (\Throwable $e) {
-
-                echo '<details open>';
-                echo '<summary><strong>3. TURI Error</strong></summary>';
-                echo '<pre>';
-                print_r([
-                    'message' => $e->getMessage(),
-                    'file' => $e->getFile(),
-                    'line' => $e->getLine(),
-                ]);
-                echo '</pre>';
-                echo '</details>';
-            }
         }
 
     } else {

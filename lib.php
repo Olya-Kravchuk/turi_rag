@@ -2,13 +2,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-/**
- * Add TURI RAG to course navigation.
- *
- * @param navigation_node $navigation
- * @param stdClass $course
- * @param context_course $context
- */
 function local_turi_rag_extend_navigation_course(
     navigation_node $navigation,
     stdClass $course,
